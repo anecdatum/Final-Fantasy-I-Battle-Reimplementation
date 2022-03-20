@@ -7,30 +7,31 @@ public class Weapon {
     protected int index;
     protected int weaponAttack;
     protected int weaponAccuracy;
-    protected ArrayList<String> enemyFamilyType = new ArrayList<>();
+    protected ArrayList<String> enemyFamilyTypes = new ArrayList<>();
     {
-        enemyFamilyType.add("MAGICAL");
-        enemyFamilyType.add("DRAGOYN");
-        enemyFamilyType.add("GIANT");
-        enemyFamilyType.add("UNDEAD");
-        enemyFamilyType.add("WERE");
-        enemyFamilyType.add("AQUATIC");
-        enemyFamilyType.add("MAGE");
-        enemyFamilyType.add("REGENERATIVE");
+        enemyFamilyTypes.add("MAGICAL");
+        enemyFamilyTypes.add("DRAGOYN");
+        enemyFamilyTypes.add("GIANT");
+        enemyFamilyTypes.add("UNDEAD");
+        enemyFamilyTypes.add("WERE");
+        enemyFamilyTypes.add("AQUATIC");
+        enemyFamilyTypes.add("MAGE");
+        enemyFamilyTypes.add("REGENERATIVE");
     }
+    protected ArrayList<String> currentEnemyFamilyTypes = new ArrayList<>();
     // Potentially add current enemyFamilyType(s)
-    protected ArrayList<String> element = new ArrayList<>();
+    protected ArrayList<String> elements = new ArrayList<>();
     {
-        element.add("STATUS");
-        element.add("POISON_STONE");
-        element.add("TIME");
-        element.add("DEATH");
-        element.add("FIRE");
-        element.add("ICE");
-        element.add("LIGHTNING");
-        element.add("EARTH");
+        elements.add("STATUS");
+        elements.add("POISON_STONE");
+        elements.add("TIME");
+        elements.add("DEATH");
+        elements.add("FIRE");
+        elements.add("ICE");
+        elements.add("LIGHTNING");
+        elements.add("EARTH");
     }
-    // Potentially add current element(s)
+    protected ArrayList<String> currentElements = new ArrayList<>();
     protected int criticalRate;
     protected ArrayList<String> equipabble = new ArrayList<>();
 }
