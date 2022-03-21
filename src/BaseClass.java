@@ -47,7 +47,7 @@ public class BaseClass {
 
     protected Weapon weapon;
     protected ArrayList<Armor> armor = new ArrayList<>();
-    protected ArrayList<Spell> spells = new ArrayList<>();
+    protected ArrayList<Magic.Spell> spells = new ArrayList<>();
 
     // Battle stats
 
@@ -324,10 +324,12 @@ public class BaseClass {
                 // Determine if a weapon attribute matches an elemental weakness
                 for (String str : this.weapon.currentElements) {
                     if (target.weaknesses.contains(str)) baseChanceToHit += 40;
+                    break; // Only occurs once
                 }
                 // Determine if a weapon attribute matches an enemy type
                 for (String str : this.weapon.currentEnemyFamilyTypes) {
                     if (target.currentEnemyFamilyTypes.contains(str)) baseChanceToHit += 40;
+                    break; // Only occurs once
                 }
             }
             // Calculate the Chance to Hit
@@ -396,16 +398,22 @@ public class BaseClass {
                         }
                     }
                 }
+                // Minimum damage per hit must be one
+                if (tempPhysicalAttacks[i] <= 0) tempPhysicalAttacks[i] = 1;
             }
-            // Minimum damage per hit must be one
-            if (tempPhysicalAttacks[i] <= 0) tempPhysicalAttacks[i] = 1;
         }
-        int sumOfAllPhysicalAttacks = numberOfHits;
+        int sumOfAllPhysicalAttacks = 0;
         for (int i : tempPhysicalAttacks) {
             sumOfAllPhysicalAttacks += i;
         }
+        // Potentially merely decrease the target's HP by sumOfAllPhysicalAttacks
         return sumOfAllPhysicalAttacks;
     }
+
+    public void useMagic(String str) {
+        // if (
+    }
+
 
     // Constructors
 
