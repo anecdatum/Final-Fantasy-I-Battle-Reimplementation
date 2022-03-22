@@ -86,4 +86,21 @@ public class Magic {
         }
         protected ArrayList<String> currentUsableClasses = new ArrayList<>();
     }
+
+    /**
+     * Contains varibles and methods pertaining to Skills, best described as a subclass of Magic.
+     */
+    public class Skill extends Magic {
+        protected ArrayList<String> elements = new ArrayList<>();
+        {
+            elements.add("STATUS");
+            elements.add("POISON_STONE");
+            elements.add("TIME");
+            elements.add("DEATH");
+            elements.add("FIRE");
+            elements.add("ICE");
+            elements.add("LIGHTNING");
+            elements.add("EARTH");
+        }
+    }
 }

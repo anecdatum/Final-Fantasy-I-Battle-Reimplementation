@@ -410,8 +410,16 @@ public class BaseClass {
         return sumOfAllPhysicalAttacks;
     }
 
-    public void useMagic(String str) {
-        // if (
+    public void useMagic(String str) throws IllegalArgumentException {
+        // Determine if the selected spell is within the class' spell list
+        Boolean containsSpell = false;
+        for (Magic.Spell spell : this.spells) {
+            if (spell.name.equals(str)) containsSpell = true;
+        }
+        // Shouldn't occur in normal operation due to interfacing
+        if (!containsSpell)
+            throw new IllegalArgumentException("Class does not contain the specified spell.");
+        // Use Magic.use() to determine further action of the spell
     }
 
 
