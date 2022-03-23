@@ -1,10 +1,15 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+
 /**
  * Contains data for objects such as for weapons, spells, enemies, and others.
  * There are likely better ways of doing this.
  */
 public class Data {
     public static class BaseData extends Data {
-            final protected Object[][] NESWeaponData =
+            static final protected Object[][] NESWeaponData =
                     {{"Index", "Weapon", "Weapon Type", "Attack", "Hit Percent",
                     "Critical", "Type", "Spell", "Price", "Equippable By"},
                     {1, "Wooden", "Nunchucks", 12, 0, 10, null, null, 10, "NINJA RED_MAGE"},
@@ -48,31 +53,71 @@ public class Data {
                     {39, "Xcalber", null, 45, 35, 5, "ALL", null, 60000, "KNIGHT"},
                     {40, "Masmune", null, 56, 50, 10, null, null, 60000, "FIGHTER THIEF BLACK_BELT RED_MAGE WHITE_MAGE BLACK_MAGE"}};
 
-            final protected Object[][] NESArmorData =
-                    {{"Index", "Armor", "Armor Type", "Defense", "Weight", "Resist", "Spell", "Price", "Equippable By"}};
+            static final protected Object[][] NESArmorData =
+                    {{"Index", "Armor", "Armor Type", "Defense", "Weight", "Resist", "Spell", "Price", "Equippable By"},
+                     {1, "Cloth", null, 1, 2, null, null, 10, "FIGHTER THIEF BLACK_BELT RED_MAGE"},
+                     {2, "Wooden", "Armor", 4, 8, null, null, 50, "FIGHTER THIEF BLACK_BELT RED_MAGE"},
+                     {3, "Chain", "Armor", 15, 15, null, null, 80, "FIGHTER NINJA RED_MAGE"},
+                     {4, "Iron", "Armor", 24, 23, null, null, 800, "FIGHTER NINJA"},
+                     {5, "Steel", "Armor", 34, 33, null, null, 45000, "FIGHTER"},
+                     {6, "Silver", "Armor", 18, 8, null, null, 7500, "FIGHTER NINJA RED_MAGE"},
+                     {7, "Flame", "Armor", 34, 10, "ICE", null, 30000, "FIGHTER NINJA"},
+                     {8, "Ice", "Armor", 34, 10, "FIRE", null, 30000, "FIGHTER NINJA"},
+                     {9, "Opal", "Armor", 42, 10, "LIGHTNING", null, 60000, "KNIGHT"},
+                     {10, "Dragon", "Armor", 42, 10, "FIRE ICE LIGHTNING", null, 60000, "KNIGHT"},
+                     {11, "Copper", "Bracelet", 4, 1, null, null, 100, "FIGHTER THIEF BLACK_BELT RED_MAGE"},
+                     {12, "Silver", "Bracelet", 15, 1, null, null, 5000, "FIGHTER THIEF BLACK_BELT RED_MAGE"},
+                     {13, "Gold", "Bracelet", 24, 1, null, null, 50000, "FIGHTER THIEF BLACK_BELT RED_MAGE"},
+                     {14, "Opal", "Bracelet", 34, 1, null, null, 65000, "FIGHTER THIEF BLACK_BELT RED_MAGE"},
+                     {15, "White", "Robe", 24, 2, "FIRE DEATH", "INV2", 2, null},
+                     {16, "Black", "Robe", 24, 2, "ICE TIME", "ICE2", 2, null},
+                     {17, "Wooden", "Shield", 2, 0, null, null, 15, "FIGHTER NINJA"},
+                     {18, "Iron", "Shield", 4, 0, null, null, 100, "FIGHTER NINJA"},
+                     {19, "Silver", "Shield", 8, 0, null, null, 2500, "FIGHTER NINJA"},
+                     {20, "Flame", "Shield", 12, 0, "ICE", null, 10000, "FIGHTER NINJA"},
+                     {21, "Ice", "Shield", 12, 0, "FIRE", null, 10000, "FIGHTER NINJA"},
+                     {22, "Opal", "Shield", 16, 0, "LIGHTNING", null, 15000, "KNIGHT"},
+                     {23, "Aegis", "Shield", 16, 0, "POISON", null, 40000, "KNIGHT"},
+                     {24, "Buckler", null, 2, 0, null, null, 2500, "FIGHTER THIEF RED_MAGE"},
+                     {25, "ProCape", null, 8, 2, null, null, 20000, "FIGHTER THIEF RED_MAGE"},
+                     {26, "Cap", 1, 1, null, null, 80, "FIGHTER THIEF BLACK_BELT RED_MAGE"},
+                     {27, "Wooden", "Helmet", 3, 3, null, null, 100, "FIGHTER NINJA"},
+                     {28, "Iron", "Helmet", 5, 5, null, null, 450, "FIGHTER NINJA"},
+                     {29, "Silver", "Helmet", 6, 3, null, null, 2500, "FIGHTER NINJA"},
+                     {30, "Opal", "Helmet", 8, 3, null, null, 10000, "KNIGHT"},
+                     {31, "Heal", "Helmet", 6, 3, null, "HEAL", 20000, "KNIGHT NINJA"},
+                     {32, "Ribbon", 1, 1, "ALL", null, 2, "FIGHTER THIEF BLACK_BELT RED_MAGE"},
+                     {33, "Gloves", 1, 1, null, null, 60, "FIGHTER THIEF BLACK_BELT RED_MAGE"},
+                     {34, "Copper", "Gauntlet", 2, 3, null, null, 200, "FIGHTER NINJA"},
+                     {35, "Iron", "Gauntlet", 4, 5, null, null, 750, "FIGHTER NINJA"},
+                     {36, "Silver", "Gauntlet", 6, 3, null, null, 2500, "FIGHTER NINJA RED_WIZARD"},
+                     {37, "Zeus", "Gauntlet", 6, 3, null, "LIT2", 15000, "KNIGHT NINJA RED_WIZARD"},
+                     {38, "Power", "Gauntlet", 6, 3, null, "SABR", 10000, "FIGHTER NINJA RED_WIZARD"},
+                     {39, "Opal", "Gauntlet", 8 , 3, null, null, 20000, "KNIGHT"},
+                     {40, "ProRing", null, 8, 1, "DEATH", null, 20000, "FIGHTER THIEF BLACK_BELT RED_MAGE"}};
 
-            final protected Object[][][] NESWeaponCriticalHitChanceTable =
-                    {{{"Index", "Chance of at Least 1 Critical Hit", "Chance of specified number of Critical Hits"}}};
+            static final protected Object[][][] NESWeaponCriticalHitChanceTable =
+                    {{{"Index", "Name", "Hit Number Potential", "Chance of specified number of Critical Hits", "Probability"}}};
 
-            final protected Object[][] NESSpellData =
+        static final protected Object[][] NESSpellData =
                     {{"Index", "Name", "Effectivity", "Accuracy", "Element", "Target", "Effect", "Price", "Usable Classes"}};
 
-            final protected Object[][] NESItemData = {{"Index", "Name", "Effectivity", "Accuracy", "Target", "Effect"}};
+            static final protected Object[][] NESItemData = {{"Index", "Name", "Effectivity", "Accuracy", "Target", "Effect"}};
 
-            final protected Object[][] NESSkillData = {{"Index", "Name", "Effectivity", "Accuracy", "Element", "Target", "Effect"}};
+            static final protected Object[][] NESSkillData = {{"Index", "Name", "Effectivity", "Accuracy", "Element", "Target", "Effect"}};
 
-            final protected Object[][] NESGroupSurpriseFactorsData =
+            static final protected Object[][] NESGroupSurpriseFactorsData =
                     {{"Index", "Composition", "Surprise Factor"}};
 
-            final protected Object[][] NESUnrunnableBattleData = {{"Index", "Composition"}};
+            static final protected Object[][] NESUnrunnableBattleData = {{"Index", "Composition"}};
 
-            final protected Object[][] NESEnemyData =
+            static final protected Object[][] NESEnemyData =
                     {{"Index", "Name", "HP", "Attack", "Accuracy", "Number of Hits", "Critical Rate", "Defense", "Evasion",
                       "Magic Defense", "Morale", "Status Attack", "Status Attack Element", "Enemy Family", "Weaknesses",
                       "Resistances", "Magic", "Special", "Gold", "Experience", "Formations", "Locations", "AI"}};
 
-            final protected Object[][] NESPatternTableData = {{"Index", "Composition"}};
+            static final protected Object[][] NESPatternTableData = {{"Index", "Composition"}};
 
-            final protected Object[][] NESEnemyFormationList = {{}};
+            static final protected Object[][] NESEnemyFormationList = {{}};
         }
     }

@@ -165,22 +165,24 @@ public class Enemy {
                 // Formula for base chance to inflict is 100, unless the target is resistant to the
                 // enemy's attack element, in which case the base chance is 0
                 // Determine if a resistance is present among the target's armor
-                for (Armor armor : target.armor) {
-                    for (String str : this.statusAttackElement) {
-                        if (armor.element.contains(str)) baseChanceToInflict = 0;
-                        break; // Only occurs once
+                if (!applyStatus) { // Only calculate if a chance to apply has not been determined
+                    for (Armor armor : target.armor) {
+                        for (String str : this.statusAttackElement) {
+                            if (armor.element.contains(str)) baseChanceToInflict = 0;
+                            break; // Only occurs once
+                        }
                     }
+                    // Formula for chance to inflict is base chance to inflict - magic defense
+                    chanceToInflict = baseChanceToInflict - this.magicDefense;
+                    // Formula for determining if a status is inflicted is a random number from 0...200
+                    // ; if the number is less than or equal to the chance to inflict, the status is
+                    // applied
+                    // Random number used for chance to inflict calculations
+                    int chanceToInflictRandomNumber = (int) Math.floor(Math.random() * 200);
+                    if (chanceToInflictRandomNumber <= chanceToInflict &&
+                            chanceToInflictRandomNumber != 200) applyStatus = true;
+                    // target.currentStatuses.add() temporary implementation
                 }
-                // Formula for chance to inflict is base chance to inflict - magic defense
-                chanceToInflict = baseChanceToInflict - this.magicDefense;
-                // Formula for determining if a status is inflicted is a random number from 0...200
-                // ; if the number is less than or equal to the chance to inflict, the status is
-                // applied
-                // Random number used for chance to inflict calculations
-                int chanceToInflictRandomNumber = (int)Math.floor(Math.random() * 200);
-                if (chanceToInflictRandomNumber <= chanceToInflict &&
-                        chanceToInflictRandomNumber != 200) applyStatus = true;
-                        // target.currentStatuses.add() temporary implementation
                 // Update Attack to ensure accuracy
                 // this.calculateAttack(); Potentially remove; enemy attack is predetermined
                 // and not influenced by equipment and weapons
